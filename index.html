@@ -3,191 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моё портфолио</title>
+    <title>Портфолио | Подлуцкий Никита</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@400;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Шапка сайта -->
-    <header class="header">
-        <div class="container">
-            <div class="header__inner">
-                <div class="logo">
-                    <h1 class="logo__text">Мое Портфолио</h1>
-                </div>
-                <nav class="nav">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#about" class="nav__link">О себе</a></li>
-                        <li class="nav__item"><a href="#projects" class="nav__link">Проекты</a></li>
-                        <li class="nav__item"><a href="#skills" class="nav__link">Навыки</a></li>
-                        <li class="nav__item"><a href="#contacts" class="nav__link">Контакты</a></li>
-                        <li class="nav__item"><div class="theme-toggle" id="themeToggle">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                            </svg>
-                          </div></li>
-                        
-                    </ul>
-                </nav>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h2>Никита</h2>
+                <p>ИССЛЕДОВАТЕЛЬ В ОБЛАСТИ ML</p>
             </div>
-        </div>
-    </header>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Главная</a></li>
+                    <li><a href="portfolio.html">Портфолио</a></li>
+                    <li><a href="about.html">О себе</a></li>
+                    <li><a href="contact.html">Контакт</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </header>
 
-    <!-- Основное содержимое -->
-    <main class="main">
-        <!-- Секция О себе -->
-        <section class="section" id="about">
-            <div class="container">
-                <h2 class="section__title">О себе</h2>
-                <div class="about__content">
-                    <div class="about__photo">
-                        <img src="assets/profile-photo.jpg" alt="Моё фото" class="photo">
-                    </div>
-                    <div class="about__info">
-                        <p class="about__text">Привет! Меня зовут <span class="highlight">Никита</span>. Я студент в области <span class="highlight">ML</span>. Мне интересны ML, DL, NLP и современные технологии.</p>
-                        <p class="about__text">В свободное время я занимаюсь саморазвитием, изучаю новые технологии и работаю над собственными проектами. Мой девиз: "<span class="highlight">Учиться новому каждый день</span>".</p>
-                        <a href="#contacts" class="button">Связаться со мной</a>
+        <main class="hero">
+            <div class="hero-content">
+                <h1>Подлуцкий Никита</h1>
+                <p class="job-title">ML researcher / Специалист по данным</p>
+
+                <h2 class="tagline">Создаю интеллектуальные системы,<br>которые понимают ваши данные</h2>
+
+                <div class="cta-buttons">
+                    <a href="portfolio.html" class="btn primary-btn">Смотреть портфолио</a>
+                    <a href="about.html" class="btn secondary-btn">Обо мне</a>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="profile-frame">
+                    <div class="profile-image">
+                        <img src="assets\profile-photo.jpg" alt="Подлуцкий Никита">
                     </div>
                 </div>
             </div>
-        </section>
+        </main>
 
-        <!-- Секция Проекты -->
-        <section class="section section--light" id="projects">
-            <div class="container">
-                <h2 class="section__title">Проекты</h2>
-                <div class="projects__list">
-                    <div class="project__card">
-                        <img src="https://i.pinimg.com/originals/86/ba/18/86ba18390af0a1ee0d82a0f74a8fc1e6.jpg" alt="Проект 1" class="project__image">
-                        <h3 class="project__title">Wake-Up Word Detection</h3>
-                        <p class="project__description">Этот проект направлен на создание и внедрение системы распознавания слов с использованием методов машинного обучения и обработки звука. Цель состоит в том, чтобы создать модель, которая сможет распознать конкретное слово или фразу из аудиовхода в режиме реального времени.</p>
-                        <a href="https://github.com/Nikita-Podlutsky/wake_up_word_detect" class="project__link">Подробнее</a>
+        <section class="featured-section">
+            <h2 class="section-title">Рекомендуемые проекты</h2>
+
+            <div class="featured-projects">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets\wuw.webp" alt="Проект в области компьютерного зрения">
                     </div>
-                    <div class="project__card">
-                        <img src="https://img.iltempo.it/upload/20130818/export.1.1171655.jpg" alt="Проект 2" class="project__image">
-                        <h3 class="project__title">Голосовой помощник</h3>
-                        <p class="project__description">Этот инструмент способен распознавать речь и реагировать на команды с помощью регулярных выражений. Он оснащён основными функциями, такими как LLM, плеер и поиск.</p>
-                        <a href="https://gitverse.ru/DeepLearningDude/voice_assistant" class="project__link">Подробнее</a>
+                    <div class="project-details">
+                        <h3>Wake Up Word анализатор</h3>
+                        <p>Этот система распознавания слов по сигналу тревоги с использованием методов машинного обучения и обработки звука. Данная модель может распознавать определенное слово или фразу из аудиовхода в режиме реального времени.</p>
+                        <a href="project1.html" class="btn small-btn">Смотреть проект</a>
                     </div>
-                    <div class="project__card">
-                        <img src="https://www.unisender.com/wp-content/uploads/2024/03/vybor-po-poryadku.jpg" alt="Проект 3" class="project__image">
-                        <h3 class="project__title">Решение каптчи</h3>
-                        <p class="project__description">Данная система предназначена для решения изображений капчи с использованием машинного обучения. Она включает в себя извлечение признаков с помощью ResNet50, обнаружение объектов с помощью YOLO и систему кэширования для улучшения производительности. Система предоставляет веб-сервис на основе FastAPI.</p>
-                        <a href="https://github.com/Nikita-Podlutsky/yandex_captcha" class="project__link">Подробнее</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/600x400" alt="Проект в области обработки естественного языка">
+                    </div>
+                    <div class="project-details">
+                        <h3>Модель для решения каптчи</h3>
+                        <p>Данная модель была разработанна для исследования обработки не размеченных данных. В процессе её получилось внедрить для решения реальной задачи.</p>
+                        <a href="project2.html" class="btn small-btn">Смотреть проект</a>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Секция Навыки -->
-        <section class="section" id="skills">
-            <div class="container">
-                <h2 class="section__title">Навыки</h2>
-                <div class="skills__container">
-                    <div class="skills__column">
-                        <h3 class="skills__subtitle">Hard Skills</h3>
-                        <ul class="skills__list">
-                            <li class="skills__item">HTML, CSS</li>
-                            <li class="skills__item">Django</li>
-                            <li class="skills__item">Python</li>
-                            <li class="skills__item">Git</li>
-                            <li class="skills__item">Flask</li>
-                        </ul>
-                    </div>
-                    <div class="skills__column">
-                        <h3 class="skills__subtitle">Soft Skills</h3>
-                        <ul class="skills__list">
-                            <li class="skills__item">Коммуникабельность</li>
-                            <li class="skills__item">Работа в команде</li>
-                            <li class="skills__item">Управление временем</li>
-                            <li class="skills__item">Решение проблем</li>
-                            <li class="skills__item">Адаптивность</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="view-all-projects">
+                <a href="portfolio.html" class="btn outline-btn">Смотреть все проекты</a>
             </div>
         </section>
-    </main>
 
-    <!-- Подвал сайта -->
-    <footer class="footer" id="contacts">
-        <div class="container">
-            <h2 class="section__title footer__title">Контакты</h2>
-            <div class="footer__content">
-                <div class="contact__info">
-                    <p class="contact__item">Email: <a href="mailto:pnikita1109@gmail.com" class="contact__link">pnikita1109@gmail.com</a></p>
-                    <p class="contact__item">Телефон: <a href="tel:+79267208389" class="contact__link">+7 (926) 720-83-89</a></p>
-                    <p class="contact__item">Адрес: г. Москва, с. Очень далеко</p>
+
+    </div>        <footer>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>Подлуцкий Никита</h3>
+                    <p>ML-инженер, специализирующийся на компьютерном зрении и обработке естественного языка</p>
                 </div>
-                <div class="social">
-                    <h3 class="social__title">Социальные сети</h3>
-                    <div class="social__links">
-                        <a href="https://t.me/Nikita_allscript" class="social__link" target="_blank">
-                            <span class="social__icon">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M22.2592 2.27922C21.9892 2.05322 21.5752 1.93322 21.0672 1.93322C20.6552 1.93322 20.1972 2.01322 19.7032 2.17322C19.2092 2.33322 18.5282 2.57722 17.6732 2.89722C16.8172 3.21722 15.8652 3.59922 14.8252 4.03922C13.7852 4.47922 12.6772 4.97722 11.5292 5.52722C10.3792 6.08122 9.27119 6.65722 8.17719 7.26722C7.09719 7.87322 6.11919 8.46722 5.26319 9.08122C4.70519 9.46722 4.20119 9.82722 3.78119 10.1712C3.36119 10.5152 3.01719 10.8232 2.74919 11.0912C2.48119 11.3592 2.27919 11.5992 2.14319 11.8112C2.00719 12.0232 1.94019 12.2072 1.94019 12.3672C1.94019 12.5272 2.00719 12.7112 2.14319 12.9232C2.27919 13.1352 2.48119 13.3792 2.74919 13.6472C3.01719 13.9152 3.36119 14.2272 3.78119 14.5672C4.20119 14.9072 4.70519 15.2712 5.26319 15.6572C5.90719 16.1312 6.69919 16.6552 7.61319 17.2272C8.53119 17.7992 9.52319 18.3472 10.6072 18.8752C11.6912 19.4032 12.7752 19.8792 13.8632 20.3272C14.9512 20.7752 15.9432 21.1432 16.8432 21.4392C17.7432 21.7352 18.4932 21.9592 19.0892 22.1072C19.6852 22.2592 20.1332 22.3352 20.4432 22.3352C20.7532 22.3352 21.0112 22.2792 21.2232 22.1672C21.4352 22.0552 21.6152 21.8832 21.7592 21.6472C21.9052 21.4152 22.0192 21.0872 22.1112 20.6712C22.2032 20.2552 22.2712 19.7272 22.3192 19.0872C22.3672 18.4472 22.3992 17.6792 22.4192 16.7832C22.4392 15.8832 22.4512 14.8392 22.4512 13.6432C22.4512 12.4472 22.4392 11.1592 22.4192 9.79522C22.3992 8.43122 22.3672 7.15522 22.3192 5.99522C22.2712 4.83922 22.2032 3.89322 22.1112 3.17322C22.0192 2.45322 21.9052 1.96322 21.7592 1.71122C21.6152 1.45922 21.4352 1.29322 21.2232 1.18722C21.0112 1.07722 20.7532 1.01722 20.4432 1.01722" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M8 11L12 15L18 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </span>
-                            Telegram
-                        </a> 
-                        <a href="https://github.com/Nikita-Podlutsky/" class="social__link" target="_blank">
-                            <span class="social__icon"> <!-- Используем для векторизации https://products.aspose.app/words/ru/conversion/image-to-svg -->
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 2C6.477 2 2 6.477 2 12C2 16.418 4.865 20.166 8.839 21.489C9.339 21.581 9.521 21.272 9.521 21.008C9.521 20.768 9.513 20.018 9.509 19.183C6.726 19.79 6.139 17.88 6.139 17.88C5.686 16.74 5.031 16.432 5.031 16.432C4.132 15.85 5.097 15.862 5.097 15.862C6.094 15.93 6.626 16.853 6.626 16.853C7.521 18.389 8.969 17.926 9.539 17.671C9.631 17.044 9.889 16.582 10.175 16.319C7.954 16.052 5.62 15.257 5.62 11.5C5.62 10.39 6.01 9.484 6.646 8.779C6.543 8.522 6.199 7.533 6.746 6.155C6.746 6.155 7.586 5.887 9.497 7.184C10.295 6.964 11.15 6.853 12 6.849C12.85 6.853 13.705 6.964 14.505 7.184C16.414 5.887 17.252 6.155 17.252 6.155C17.801 7.533 17.456 8.522 17.354 8.779C17.992 9.484 18.38 10.39 18.38 11.5C18.38 15.266 16.042 16.049 13.813 16.309C14.172 16.635 14.492 17.28 14.492 18.263C14.492 19.688 14.479 20.675 14.479 21.008C14.479 21.275 14.659 21.587 15.167 21.487C19.138 20.162 22 16.416 22 12C22 6.477 17.523 2 12 2Z" fill="currentColor"/>
-                                </svg>
-                            </span>
-                            GitHub
-                        </a>
+
+                <div class="footer-right">
+                    <div class="social-links">
+                        <a href="https://github.com/Nikita-Podlutsky"><i class="fa fa-github" aria-hidden="true"></i></a>
+                        <a href="https://t.me/Nikita_allscript"><i class="fa fa-telegram"></i></a>
+
                     </div>
                 </div>
             </div>
-            <div class="copyright">
-                <p>© 2025 Мое Портфолио. Все права защищены.</p>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Подлуцкий Никита. Все права защищены.</p>
             </div>
-        </div>
-    </footer>
-
-
-    <script>document.addEventListener('DOMContentLoaded', function() {
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        const header = document.querySelector('.header');
-        const lightThemeClass = 'light-theme';
-        const darkThemeClass = ''; // Темная тема по умолчанию, поэтому класс не нужен
-      
-        // Функция для установки темы
-        function setTheme(theme) {
-          if (theme === 'light') {
-            body.classList.add(lightThemeClass);
-            header.classList.add("light");
-            localStorage.setItem('theme', 'light');
-          } else {
-            body.classList.remove(lightThemeClass);
-            header.classList.remove("light");
-            localStorage.setItem('theme', 'dark');
-          }
-        }
-      
-        // Проверяем сохраненную тему при загрузке страницы
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-          setTheme(savedTheme);
-        } else {
-          // Если тема не сохранена, устанавливаем темную тему по умолчанию
-          setTheme('dark');
-        }
-      
-        // Обработчик клика на кнопку переключения темы
-        themeToggle.addEventListener('click', function() {
-          if (body.classList.contains(lightThemeClass)) {
-            setTheme('dark');
-          } else {
-            setTheme('light');
-          }
-        });
-      });</script>
+        </footer>
+        <script src="script.js"></script>
 </body>
 </html>

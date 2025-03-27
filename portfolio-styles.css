@@ -1,0 +1,234 @@
+/* Portfolio Page Specific Styles */
+
+.portfolio-header {
+    padding: 6rem 0 4rem;
+    text-align: center;
+}
+
+.portfolio-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-family: 'Montserrat', sans-serif; /* Добавлено для соответствия */
+    font-weight: 600; /* Добавлено для соответствия */
+}
+
+.portfolio-header p {
+    color: var(--secondary-text);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+}
+
+.portfolio-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.filter-btn {
+    background-color: transparent;
+    border: 1px solid var(--accent-color); /* Изменено на цвет акцента */
+    color: var(--accent-color); /* Изменено на цвет акцента */
+    padding: 0.8rem 2rem; /* Приведено к размеру кнопки */
+    border-radius: 4px; /* Приведено к форме кнопки */
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500; /* Добавлено для соответствия */
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px; /* Добавлено для соответствия */
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--darker-bg);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 6rem;
+}
+
+.project-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 300px;
+    transition: transform 0.3s ease;
+}
+
+.project-item:hover {
+    transform: translateY(-10px);
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-item:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.3) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-item:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-details {
+    width: 100%;
+}
+
+.project-details h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif; /* Добавлено для соответствия */
+    font-weight: 600; /* Добавлено для соответствия */
+}
+
+.project-details p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-text);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.project-tags span {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.project-overlay .project-details a.small-btn {
+    background-color: var(--accent-color); /* Цвет как у primary-btn */
+    color: var(--darker-bg); /* Цвет текста как у primary-btn */
+    border: none; /* Убираем границу, если есть */
+    padding: 0.5rem 1.5rem; /* Размеры как у small-btn */
+    border-radius: 4px; /* Форма как у primary-btn */
+    font-weight: 500;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem; /* Размер шрифта как у small-btn */
+}
+
+.project-overlay .project-details a.small-btn:hover {
+    background-color: #c2af7d; /* Цвет при наведении как у primary-btn */
+    color: var(--darker-bg);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-overlay {
+        opacity: 1; /* Чтобы описание всегда было видно на мобильных */
+    }
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 0.9rem 2.2rem; /* Чуть больше отступы */
+    border-radius: 50px;   /* Сильно скругленные углы (форма "пилюли") */
+    font-weight: 600;      /* Немного жирнее шрифт */
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    border: 1px solid transparent; /* Добавляем рамку для согласованности */
+    text-transform: uppercase; /* Текст заглавными */
+    font-size: 0.9rem;       /* Немного уменьшим базовый размер шрифта */
+  }
+  
+  .primary-btn {
+    background-color: var(--accent-color);
+    color: var(--darker-bg);
+    border-color: var(--accent-color); /* Указываем цвет рамки */
+  }
+  
+  .primary-btn:hover {
+    background-color: #c2af7d; /* Немного темнее при наведении */
+    border-color: #c2af7d;
+    color: var(--darker-bg);
+    transform: translateY(-2px); /* Небольшой подъем при наведении */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Легкая тень */
+  }
+  
+  .secondary-btn {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+  }
+  
+  .secondary-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--darker-bg);
+    transform: translateY(-2px); /* Небольшой подъем при наведении */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Легкая тень */
+  }
+  
+  /* Для маленьких кнопок, если нужны */
+  .small-btn {
+    padding: 0.6rem 1.6rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Убираем стили outline-btn, если не используем, или адаптируем их */
+  .outline-btn {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    border-radius: 50px; /* Согласовываем радиус */
+  }
+  
+  .outline-btn:hover {
+    background-color: var(--text-color);
+    color: var(--darker-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }

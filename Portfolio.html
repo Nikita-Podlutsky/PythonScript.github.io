@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио | Подлуцкий Никита</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="portfolio-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Consider using a generic Font Awesome CDN if this is not your specific kit -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h2>Никита</h2>
+                <p>ML ИНЖЕНЕР</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="portfolio.html" class="active">Портфолио</a></li>
+                    <li><a href="about.html">О себе</a></li>
+                    <li><a href="contact.html">Контакт</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </header>
+
+        <section class="portfolio-header">
+            <h1>Мои проекты</h1>
+            <p>Коллекция моих работ в области машинного обучения, науки о данных и AI</p>
+
+            <div class="portfolio-filters">
+                <button class="btn active" data-filter="all">Все проекты</button>
+                <button class="btn" data-filter="ml">Machine Learning</button>
+                <button class="btn" data-filter="nlp">NLP</button>
+                <button class="btn" data-filter="vision">Computer Vision</button>
+                <button class="btn" data-filter="data">Анализ данных</button>
+                 <!-- You might consider adding an 'audio' filter later if you have more audio projects -->
+            </div>
+        </section>
+
+        <section class="portfolio-grid">
+            <!-- Project 1: Captcha Solver -->
+            <div class="project-item" data-category="vision ml">
+                <div class="project-image">
+                    <!-- Replace with a relevant image for the Captcha Solver -->
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Система Решения Капчи">
+                </div>
+                <div class="project-overlay">
+                    <div class="project-details">
+                        <h3>Система Решения Капчи</h3>
+                        <p>Система на основе ResNet50 и YOLO для решения капч с кэшированием и API на FastAPI.</p>
+                        <div class="project-tags">
+                            <span>PyTorch</span>
+                            <span>Computer Vision</span>
+                            <span>YOLO</span>
+                            <span>FastAPI</span>
+                        </div>
+                        <!-- Link to the future detailed project page -->
+                        <a href="project-captcha-solver.html" class="btn small-btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Wake-Up Word Detection -->
+            <div class="project-item" data-category="ml"> <!-- Primarily ML, involves audio processing -->
+                <div class="project-image">
+                     <!-- Replace with a relevant image for Wake-Up Word Detection -->
+                    <img src="assets\wuw.webp" alt="Распознавание Ключевого Слова">
+                </div>
+                <div class="project-overlay">
+                    <div class="project-details">
+                        <h3>Распознавание Ключевого Слова</h3>
+                        <p>Система реального времени для распознавания ключевого слова в аудио с использованием Keras/PyTorch.</p>
+                        <div class="project-tags">
+                            <span>PyTorch</span>
+                            <span>Keras</span>
+                            <span>Audio Processing</span>
+                            <span>Real-time</span>
+                        </div>
+                         <!-- Link to the future detailed project page -->
+                        <a href="project-wake-word.html" class="btn small-btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Placeholder -->
+            <div class="project-item" data-category="data">
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/600x400" alt="Панель визуализации данных">
+                </div>
+                <div class="project-overlay">
+                    <div class="project-details">
+                        <h3>Интерактивная панель данных</h3>
+                        <p>Визуализация данных в реальном времени для мониторинга показателей производительности системы.</p>
+                        <div class="project-tags">
+                            <span>D3.js</span>
+                            <span>Python</span>
+                            <span>Flask</span>
+                        </div>
+                        <a href="project3.html" class="btn small-btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: Placeholder -->
+            <div class="project-item" data-category="ml vision">
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/600x400" alt="Генерация изображений">
+                </div>
+                <div class="project-overlay">
+                    <div class="project-details">
+                        <h3>Генерация изображений с помощью GAN</h3>
+                        <p>Создание фотореалистичных изображений с использованием генеративно-состязательных сетей.</p>
+                        <div class="project-tags">
+                            <span>GANs</span>
+                            <span>PyTorch</span>
+                            <span>Deep Learning</span>
+                        </div>
+                        <a href="project4.html" class="btn small-btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5: Placeholder -->
+            <div class="project-item" data-category="nlp ml">
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/600x400" alt="Суммаризация текста">
+                </div>
+                <div class="project-overlay">
+                    <div class="project-details">
+                        <h3>Абстрактивная суммаризация текста</h3>
+                        <p>Модель на основе Transformer для создания кратких summary длинных текстов.</p>
+                        <div class="project-tags">
+                            <span>NLP</span>
+                            <span>Transformers</span>
+                            <span>Hugging Face</span>
+                        </div>
+                        <a href="project5.html" class="btn small-btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6: Placeholder -->
+            <div class="project-item" data-category="data ml">
+                <div class="project-image">
+                    <img src="https://via.placeholder.com/600x400" alt="Обнаружение аномалий">
+                </div>
+                <div class="project-overlay">
+                    <div class="project-details">
+                        <h3>Обнаружение аномалий во временных рядах</h3>
+                        <p>Обнаружение необычных закономерностей во временных рядах с использованием сетей автокодировщиков.</p>
+                        <div class="project-tags">
+                            <span>Time Series</span>
+                            <span>Keras</span>
+                            <span>Anomaly Detection</span>
+                        </div>
+                        <a href="project6.html" class="btn small-btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <!-- Footer content remains the same -->
+        <div class="footer-content">
+            <div class="footer-left">
+                <h3>Подлуцкий Никита</h3>
+                <p>ML Инженер, специализирующийся на компьютерном зрении и обработке естественного языка</p>
+            </div>
+
+            <div class="footer-right">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-medium"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Подлуцкий Никита. Все права защищены.</p> <!-- Remember to update the year -->
+        </div>
+    </footer>
+
+    <script src="portfolio-script.js"></script>
+</body>
+</html>
