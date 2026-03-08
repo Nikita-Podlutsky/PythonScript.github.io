@@ -1,111 +1,599 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио | Подлуцкий Никита</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nikita Podlutsky — ML Research Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Epilogue:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #080810;
+      --bg2:     #0e0e1a;
+      --surface: #141420;
+      --surface2:#1c1c2e;
+      --green:   #39ff7a;
+      --amber:   #ffb340;
+      --blue:    #4d9fff;
+      --text:    #dde0f0;
+      --muted:   #5c5c80;
+      --border:  rgba(255,255,255,0.06);
+      --fh: 'Bebas Neue', sans-serif;
+      --fb: 'Epilogue', sans-serif;
+      --fm: 'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--text); font-family:var(--fb); font-size:15px; line-height:1.65; overflow-x:hidden; cursor:none; }
+    ::-webkit-scrollbar { width:3px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:var(--green); }
+
+    /* CURSOR */
+    #cur  { width:6px;height:6px;background:var(--green);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s; }
+    #curR { width:28px;height:28px;border:1px solid var(--green);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.3; }
+
+    /* PROGRESS */
+    #prog { position:fixed;top:0;left:0;height:2px;background:var(--green);z-index:1000;width:0;box-shadow:0 0 10px var(--green); }
+
+    /* NOISE */
+    body::after { content:'';position:fixed;inset:0;pointer-events:none;z-index:800;opacity:.022;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+    /* NAV */
+    nav { position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:20px 56px;border-bottom:1px solid transparent;transition:border-color .3s,background .3s; }
+    nav.scrolled { background:rgba(8,8,16,.93);border-color:var(--border);backdrop-filter:blur(12px); }
+    .nav-logo { font-family:var(--fh);font-size:22px;letter-spacing:.08em;color:var(--text);text-decoration:none; }
+    .nav-logo span { color:var(--green); }
+    .nav-links { display:flex;gap:36px;list-style:none; }
+    .nav-links a { font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s; }
+    .nav-links a:hover { color:var(--green); }
+    .nav-status { display:flex;align-items:center;gap:8px;font-family:var(--fm);font-size:11px;color:var(--muted); }
+    .dot-live { width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 6px var(--green);animation:blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1}50%{opacity:.3} }
+
+    /* HERO */
+    .hero { min-height:100svh;display:grid;grid-template-columns:1fr 400px;gap:0;align-items:end;padding:0 56px 72px;position:relative;overflow:hidden; }
+    .hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 30%,rgba(57,255,122,.05) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(77,159,255,.04) 0%,transparent 60%); }
+    .hero-grid-lines { position:absolute;inset:0;background-image:linear-gradient(rgba(57,255,122,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(57,255,122,.025) 1px,transparent 1px);background-size:80px 80px;animation:gridMove 30s linear infinite; }
+    @keyframes gridMove { to { background-position:80px 80px; } }
+    .hero-left { position:relative;z-index:2; }
+    .hero-tag { font-family:var(--fm);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:24px;display:flex;align-items:center;gap:12px;opacity:0;animation:up .7s .1s forwards; }
+    .hero-tag::before { content:'';width:32px;height:1px;background:var(--green); }
+    h1 { font-family:var(--fh);font-size:clamp(72px,10vw,148px);line-height:.9;letter-spacing:.02em;opacity:0;animation:up .8s .25s forwards; }
+    h1 .line2 { color:var(--muted);display:block; }
+    h1 .acc { color:var(--green); }
+    .hero-desc { margin-top:32px;max-width:580px;color:var(--muted);font-size:14px;line-height:1.9;opacity:0;animation:up .8s .4s forwards; }
+    .hero-desc strong { color:var(--text); }
+    .hero-cta { margin-top:40px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;opacity:0;animation:up .8s .55s forwards; }
+    .btn { display:inline-flex;align-items:center;gap:10px;padding:11px 26px;font-family:var(--fm);font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;cursor:none; }
+    .btn-g { background:var(--green);color:#000; }
+    .btn-g:hover { background:#fff;transform:translateY(-2px); }
+    .btn-o { border:1px solid var(--border);color:var(--muted); }
+    .btn-o:hover { border-color:var(--green);color:var(--green); }
+    .hero-right { position:relative;z-index:2;display:flex;flex-direction:column;gap:10px;padding-bottom:4px;opacity:0;animation:fadeIn .9s .7s forwards; }
+    .mc { background:var(--surface);border:1px solid var(--border);padding:20px 24px;position:relative;overflow:hidden; }
+    .mc::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;transition:opacity .3s; }
+    .mc:hover::before { opacity:1; }
+    .mc-label { font-family:var(--fm);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px; }
+    .mc-val { font-family:var(--fh);font-size:44px;line-height:1;color:var(--text); }
+    .mc-val span { color:var(--green);font-size:28px; }
+    .mc-sub { font-size:12px;color:var(--muted);margin-top:4px; }
+    .mc-badge { display:inline-flex;align-items:center;gap:6px;font-family:var(--fm);font-size:10px;color:var(--green);margin-top:10px; }
+
+    /* SECTIONS */
+    section { padding:110px 56px; }
+    .stag { font-family:var(--fm);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:12px;display:flex;align-items:center;gap:10px; }
+    .stag::after { content:'';width:40px;height:1px;background:var(--green);opacity:.4; }
+    .sh { font-family:var(--fh);font-size:clamp(36px,4.5vw,60px);letter-spacing:.02em;line-height:1.05;margin-bottom:56px; }
+    .sh em { color:var(--muted);font-style:italic;font-family:var(--fb);font-weight:300; }
+
+    /* PROJECTS */
+    #projects { background:var(--bg); }
+    .proj-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:2px; }
+    .pcard { background:var(--surface);padding:44px;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:background .25s; }
+    .pcard:hover { background:var(--surface2); }
+    .pcard::after { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--green) 50%,transparent);transform:scaleX(0);transition:transform .4s; }
+    .pcard:hover::after { transform:scaleX(1); }
+    .pcard-top { grid-column:span 2; }
+    .pcard-top-inner { display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start; }
+    .pn { font-family:var(--fm);font-size:10px;letter-spacing:.15em;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;justify-content:space-between; }
+    .pn-year { color:var(--green); }
+    .pt { font-family:var(--fh);font-size:28px;letter-spacing:.03em;margin-bottom:14px;line-height:1.1; }
+    .pd { color:var(--muted);font-size:13px;line-height:1.85;margin-bottom:20px; }
+    .mrow { display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap; }
+    .mchip { padding:5px 12px;border:1px solid rgba(57,255,122,.25);font-family:var(--fm);font-size:11px;color:var(--green); }
+    .mchip-a { border-color:rgba(255,179,64,.25);color:var(--amber); }
+    .mchip-b { border-color:rgba(77,159,255,.25);color:var(--blue); }
+    .tags { display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px; }
+    .tag { font-family:var(--fm);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border:1px solid var(--border);color:var(--muted); }
+    .plink { margin-top:auto;display:inline-flex;align-items:center;gap:8px;font-family:var(--fm);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);transition:gap .2s; }
+    .pcard:hover .plink { gap:14px; }
+    .sbadge { display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;letter-spacing:.06em;text-transform:uppercase; }
+    .sb-g { color:var(--green); }
+    .sb-a { color:var(--amber); }
+    .sb-b { color:var(--blue); }
+    .sdot { width:5px;height:5px;border-radius:50%;display:inline-block; }
+    .sdot-g { background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 2s infinite; }
+    .sdot-a { background:var(--amber); }
+    .sdot-b { background:var(--blue); }
+    .pvis { background:var(--bg2);border:1px solid var(--border);min-height:260px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden; }
+    .pvis::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 40% 50%,rgba(57,255,122,.06),transparent); }
+
+    /* EXPERIENCE */
+    #experience { background:var(--bg2); }
+    .exp-layout { display:grid;grid-template-columns:280px 1fr;gap:64px; }
+    .exp-aside { position:sticky;top:120px;align-self:start; }
+    .exp-big { font-family:var(--fh);font-size:72px;line-height:.92;letter-spacing:.02em;color:var(--surface2);user-select:none; }
+    .exp-main { display:flex;flex-direction:column;gap:2px; }
+    .exp-card { background:var(--surface);padding:32px 36px;border-left:2px solid var(--border);transition:border-color .2s,background .2s; }
+    .exp-card:hover { border-color:var(--green);background:var(--surface2); }
+    .exp-date { font-family:var(--fm);font-size:10px;letter-spacing:.15em;color:var(--green);margin-bottom:10px; }
+    .exp-role { font-family:var(--fh);font-size:22px;letter-spacing:.03em;margin-bottom:4px; }
+    .exp-org  { font-family:var(--fm);font-size:12px;color:var(--muted);margin-bottom:16px; }
+    .exp-list { list-style:none;display:flex;flex-direction:column;gap:8px; }
+    .exp-list li { font-size:13px;color:var(--muted);padding-left:18px;position:relative;line-height:1.7; }
+    .exp-list li::before { content:'→';position:absolute;left:0;color:var(--green);font-size:11px;top:3px; }
+    .exp-list li strong { color:var(--text); }
+
+    /* STACK */
+    #stack { background:var(--bg); }
+    .stack-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:2px; }
+    .sblock { background:var(--surface);padding:32px 36px; }
+    .sblock-wide { grid-column:span 2; }
+    .sbhead { font-family:var(--fm);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:12px; }
+    .sbitems { display:flex;flex-direction:column;gap:10px; }
+    .sbitem { display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted); }
+    .sbitem::before { content:'';width:4px;height:4px;border-radius:50%;background:var(--green);flex-shrink:0; }
+    .sbitems-2 { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+
+    /* WHY */
+    #why { background:var(--bg2); }
+    .why-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:2px; }
+    .wcard { background:var(--surface);padding:36px;transition:background .2s; }
+    .wcard:hover { background:var(--surface2); }
+    .wnum { font-family:var(--fh);font-size:56px;color:var(--surface2);line-height:1;margin-bottom:16px; }
+    .wtitle { font-family:var(--fb);font-weight:700;font-size:15px;color:var(--text);margin-bottom:10px; }
+    .wtext { font-size:13px;color:var(--muted);line-height:1.85; }
+
+    /* CONTACT */
+    #contact { background:var(--bg);padding:100px 56px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center; }
+    #contact .sh { margin-bottom:16px;font-size:clamp(44px,7vw,96px); }
+    .contact-sub { color:var(--muted);font-family:var(--fm);font-size:12px;letter-spacing:.06em;margin-bottom:48px; }
+    .contact-row { display:flex;gap:12px;flex-wrap:wrap;justify-content:center; }
+
+    /* FOOTER */
+    footer { border-top:1px solid var(--border);padding:28px 56px;display:flex;justify-content:space-between;align-items:center; }
+    .fc { font-family:var(--fm);font-size:11px;color:var(--muted); }
+    .fr { font-family:var(--fm);font-size:11px;color:var(--muted); }
+    .fr a { color:var(--green);text-decoration:none; }
+
+    /* ANIMATIONS */
+    @keyframes up { from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0}to{opacity:1} }
+    .rev { opacity:0;transform:translateY(32px);transition:opacity .7s,transform .7s; }
+    .rev.in { opacity:1;transform:translateY(0); }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+
+    /* TABLET */
+    @media(max-width:1000px){
+      nav{padding:18px 24px;}
+      .nav-links,.nav-status{display:none;}
+      .hero{grid-template-columns:1fr;padding:100px 24px 64px;min-height:auto;}
+      .hero-right{display:none;}
+      section{padding:80px 24px;}
+      .proj-grid,.pcard-top-inner,.exp-layout,.stack-grid,.why-grid{grid-template-columns:1fr;}
+      .pcard-top,.sblock-wide{grid-column:span 1;}
+      .exp-aside{position:static;}
+      .exp-big{font-size:48px;}
+      footer{flex-direction:column;gap:12px;text-align:center;padding:24px;}
+    }
+
+    /* MOBILE */
+    @media(max-width:600px){
+      nav{padding:14px 18px;}
+      .nav-logo{font-size:18px;}
+      .hero{padding:80px 18px 48px;display:flex;flex-direction:column;justify-content:flex-end;min-height:100svh;}
+      h1{font-size:clamp(52px,15vw,88px);}
+      .hero-tag{font-size:10px;margin-bottom:14px;}
+      .hero-desc{font-size:13px;margin-top:18px;max-width:100%;}
+      .hero-cta{margin-top:24px;gap:8px;}
+      .btn{padding:10px 16px;font-size:10px;gap:7px;}
+      section{padding:56px 18px;}
+      .sh{font-size:clamp(26px,8vw,40px);margin-bottom:32px;}
+      .stag{font-size:9px;}
+      .proj-grid{gap:1px;}
+      .pcard{padding:24px 20px;}
+      .pcard-top-inner{grid-template-columns:1fr;gap:24px;}
+      .pt{font-size:20px;}
+      .pd{font-size:12px;line-height:1.75;}
+      .mrow{gap:6px;}
+      .mchip{font-size:10px;padding:4px 8px;}
+      .tags{gap:5px;}
+      .tag{font-size:9px;padding:2px 7px;}
+      .plink{font-size:10px;}
+      .pn{font-size:9px;flex-wrap:wrap;gap:4px;}
+      .pvis{min-height:140px;}
+      .exp-layout{gap:20px;}
+      .exp-big{display:none;}
+      .exp-card{padding:22px 18px;}
+      .exp-role{font-size:17px;}
+      .exp-org{font-size:11px;}
+      .exp-list li{font-size:12px;padding-left:16px;}
+      .exp-date{font-size:9px;}
+      .stack-grid{gap:1px;}
+      .sblock{padding:22px 18px;}
+      .sbitem{font-size:12px;}
+      .sbhead{font-size:9px;}
+      .sbitems-2{grid-template-columns:1fr;}
+      .why-grid{gap:1px;}
+      .wcard{padding:22px 18px;}
+      .wnum{font-size:32px;margin-bottom:8px;}
+      .wtitle{font-size:13px;}
+      .wtext{font-size:12px;line-height:1.75;}
+      #contact{padding:56px 18px;}
+      #contact .sh{font-size:clamp(32px,9vw,52px);}
+      .contact-sub{font-size:11px;margin-bottom:32px;}
+      .contact-row{flex-direction:column;align-items:stretch;gap:8px;}
+      .contact-row .btn{justify-content:center;padding:13px 16px;}
+      footer{padding:18px;flex-direction:column;gap:10px;text-align:center;}
+      .fc,.fr{font-size:10px;}
+      #cur,#curR{display:none;}
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <h2>Никита</h2>
-                <p>ИССЛЕДОВАТЕЛЬ В ОБЛАСТИ ML</p>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Главная</a></li>
-                    <li><a href="portfolio.html">Портфолио</a></li>
-                    <li><a href="about.html">О себе</a></li>
-                    <li><a href="contact.html">Контакт</a></li>
-                </ul>
-                <div class="menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </header>
 
-        <main class="hero">
-            <div class="hero-content">
-                <h1>Подлуцкий Никита</h1>
-                <p class="job-title">ML researcher / Специалист по данным</p>
+<div id="cur"></div>
+<div id="curR"></div>
+<div id="prog"></div>
 
-                <h2 class="tagline">Создаю интеллектуальные системы,<br>которые понимают ваши данные</h2>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">NP<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#projects">Проекты</a></li>
+    <li><a href="#experience">Опыт</a></li>
+    <li><a href="#stack">Стек</a></li>
+    <li><a href="#contact">Контакт</a></li>
+  </ul>
+  <div class="nav-status"><span class="dot-live"></span>Открыт к предложениям</div>
+</nav>
 
-                <div class="cta-buttons">
-                    <a href="portfolio.html" class="btn primary-btn">Смотреть портфолио</a>
-                    <a href="about.html" class="btn secondary-btn">Обо мне</a>
-                </div>
-            </div>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-left">
+    <p class="hero-tag">ML Research Engineer · 2025</p>
+    <h1>NIKITA<br><span class="line2">PODLUTSKY<span class="acc">.</span></span></h1>
+    <p class="hero-desc">
+      Специализируюсь на <strong>нестандартных архитектурных решениях</strong> там,
+      где ванильные трансформеры и RAG «из коробки» не дают нужного качества.
+      Адаптирую SOTA-модели под ограниченные ресурсы.
+      Работаю в <strong>MTUCI Lab260</strong>.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-g">
+        Проекты
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 6.5h11M6.5 1l5.5 5.5-5.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://github.com/Nikita-Podlutsky" target="_blank" class="btn btn-o">GitHub</a>
+      <a href="/cdn-cgi/l/email-protection#97e7f9fefcfee3f6a6a6a7aed7f0faf6fefbb9f4f8fa" class="btn btn-o">Email</a>
+      <a href="https://t.me/Nikita_allscript" target="_blank" class="btn btn-o">Telegram</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="mc">
+      <div class="mc-label">KOTODEX · Hit@1 on arXiv benchmark</div>
+      <div class="mc-val">30<span>%</span></div>
+      <div class="mc-sub">vs 17% pooling baseline (in-domain dataset)</div>
+      <div class="mc-badge"><span class="dot-live"></span>Флагманский · 2025</div>
+    </div>
+    <div class="mc">
+      <div class="mc-label">Оптимизация VRAM</div>
+      <div class="mc-val">4<span>×</span></div>
+      <div class="mc-sub">QLoRA 4-bit + LoRA 16-bit · RTX 3060</div>
+    </div>
+    <div class="mc">
+      <div class="mc-label">Time to MVP</div>
+      <div class="mc-val">3<span>wk</span></div>
+      <div class="mc-sub">От Arxiv до работающей поисковой системы</div>
+    </div>
+  </div>
+</section>
 
-            <div class="hero-image">
-                <div class="profile-frame">
-                    <div class="profile-image">
-                        <img src="assets\profile-photo.jpg" alt="Подлуцкий Никита">
-                    </div>
-                </div>
-            </div>
-        </main>
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="stag rev">Проекты</p>
+  <h2 class="sh rev">2025 / <em>Ключевые работы</em></h2>
+  <div class="proj-grid">
 
-        <section class="featured-section">
-            <h2 class="section-title">Рекомендуемые проекты</h2>
+    <a href="https://github.com/Nikita-Podlutsky" target="_blank" class="pcard pcard-top rev">
+      <div class="pcard-top-inner">
+        <div>
+          <div class="pn"><span>01 — Information Retrieval</span><span class="pn-year">2025</span></div>
+          <h3 class="pt">KOTODEX</h3>
+          <p class="pd">Кастомный иерархический реранкер с query-aware attention. Обучен и протестирован на in-domain arXiv-бенчмарке собственной сборки. Hit@1 30% против 17% у pooling-бейзлайна. Асинхронный краулер на 100+ потоков для сбора и очистки датасета с нуля.</p>
+          <div class="mrow">
+            <div class="mchip">Hit@1 30% (in-domain)</div>
+            <div class="mchip mchip-a">pooling baseline 17%</div>
+            <div class="mchip mchip-b">VRAM ÷4 · 3 нед.</div>
+          </div>
+          <div class="tags">
+            <span class="tag">PyTorch</span>
+            <span class="tag">Transformers</span>
+            <span class="tag">QLoRA</span>
+            <span class="tag">Custom Attention</span>
+            <span class="tag">AsyncIO</span>
+            <span class="tag">PEFT</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
+            <span class="sbadge sb-g"><span class="sdot sdot-g"></span>Готовый MVP</span>
+            <span class="plink">Подробнее →</span>
+          </div>
+        </div>
+        <div class="pvis">
+          <svg width="140" height="140" viewBox="0 0 140 140" fill="none" style="position:relative;z-index:1;opacity:.55;">
+            <rect x="12" y="24" width="68" height="9" rx="2" fill="#39ff7a"/>
+            <rect x="12" y="39" width="50" height="9" rx="2" fill="#39ff7a" opacity=".6"/>
+            <rect x="12" y="54" width="62" height="9" rx="2" fill="#39ff7a" opacity=".4"/>
+            <rect x="12" y="69" width="40" height="9" rx="2" fill="#39ff7a" opacity=".25"/>
+            <circle cx="102" cy="86" r="28" stroke="#39ff7a" stroke-width="1.5"/>
+            <circle cx="102" cy="86" r="14" fill="rgba(57,255,122,.07)"/>
+            <line x1="96" y1="86" x2="108" y2="86" stroke="#39ff7a" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="102" y1="80" x2="102" y2="92" stroke="#39ff7a" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="122" y1="106" x2="134" y2="118" stroke="#39ff7a" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </a>
 
-            <div class="featured-projects">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets\wuw.webp" alt="Проект в области компьютерного зрения">
-                    </div>
-                    <div class="project-details">
-                        <h3>Wake Up Word анализатор</h3>
-                        <p>Этот система распознавания слов по сигналу тревоги с использованием методов машинного обучения и обработки звука. Данная модель может распознавать определенное слово или фразу из аудиовхода в режиме реального времени.</p>
-                        <a href="project1.html" class="btn small-btn">Смотреть проект</a>
-                    </div>
-                </div>
+    <a href="https://github.com/Nikita-Podlutsky" target="_blank" class="pcard rev d1">
+      <div class="pn"><span>02 — MedTech / CV</span><span class="pn-year">2025</span></div>
+      <h3 class="pt">3D-MoE-Seg</h3>
+      <p class="pd">Сегментация структур мозга и патологий на 3D-снимках КТ/МРТ. Заменил 3D U-Net на Mixture-of-Experts: сеть динамически выбирает «эксперта» для разных текстур. Sliding Window Inference для снимков высокого разрешения.</p>
+      <div class="tags">
+        <span class="tag">PyTorch</span><span class="tag">3D Conv</span><span class="tag">MoE</span><span class="tag">Medical Imaging</span><span class="tag">Hydra</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
+        <span class="sbadge sb-a"><span class="sdot sdot-a"></span>MTUCI Lab260</span>
+        <span class="plink">GitHub →</span>
+      </div>
+    </a>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://via.placeholder.com/600x400" alt="Проект в области обработки естественного языка">
-                    </div>
-                    <div class="project-details">
-                        <h3>Модель для решения каптчи</h3>
-                        <p>Данная модель была разработанна для исследования обработки не размеченных данных. В процессе её получилось внедрить для решения реальной задачи.</p>
-                        <a href="project2.html" class="btn small-btn">Смотреть проект</a>
-                    </div>
-                </div>
-            </div>
+    <a href="https://github.com/Nikita-Podlutsky/DyWinTmodel" target="_blank" class="pcard rev d2">
+      <div class="pn"><span>03 — Audio / ASR</span><span class="pn-year">2024</span></div>
+      <h3 class="pt">DyWinT</h3>
+      <p class="pd">Эксперимент с dual-stream conformer для потокового ASR. Mel + MFCC параллельные ветки с cross-attention и overlap-add сборкой окон. Архитектурный прототип без обучения на датасете.</p>
+      <div class="tags">
+        <span class="tag">PyTorch</span><span class="tag">Conformer</span><span class="tag">Streaming ASR</span><span class="tag">Research</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
+        <span class="sbadge sb-b"><span class="sdot sdot-b"></span>Прототип · Архитектура</span>
+        <span class="plink">GitHub →</span>
+      </div>
+    </a>
 
-            <div class="view-all-projects">
-                <a href="portfolio.html" class="btn outline-btn">Смотреть все проекты</a>
-            </div>
-        </section>
+    <a href="https://github.com/Nikita-Podlutsky/CT2MRI_WithPhysicsLoss" target="_blank" class="pcard rev d2">
+      <div class="pn"><span>04 — Medical Imaging</span><span class="pn-year">2025</span></div>
+      <h3 class="pt">CT → MRI<br>Physics Loss</h3>
+      <p class="pd">Синтез МРТ из КТ с физически обоснованной функцией потерь. Нейросеть соблюдает физические ограничения медицинской визуализации, а не просто минимизирует пиксельную ошибку.</p>
+      <div class="tags">
+        <span class="tag">GAN</span><span class="tag">Physics-Informed</span><span class="tag">CT / MRI</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
+        <span class="sbadge sb-b"><span class="sdot sdot-b"></span>Research</span>
+        <span class="plink">GitHub →</span>
+      </div>
+    </a>
 
+    <a href="https://github.com/Nikita-Podlutsky/yandex_captcha" target="_blank" class="pcard rev d3">
+      <div class="pn"><span>05 — Computer Vision</span><span class="pn-year">2024</span></div>
+      <h3 class="pt">Yandex<br>Captcha Solver</h3>
+      <p class="pd">Фриланс-проект. ResNet50 + YOLO для детекции и сопоставления иконок капчи. FastAPI-сервис с кэшированием признаков. Рабочее решение под конкретный тип капчи.</p>
+      <div class="tags">
+        <span class="tag">CV</span><span class="tag">YOLO</span><span class="tag">FastAPI</span><span class="tag">PyTorch</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:auto;">
+        <span class="sbadge sb-b"><span class="sdot sdot-b"></span>Фриланс</span>
+        <span class="plink">GitHub →</span>
+      </div>
+    </a>
 
-    </div>        <footer>
-            <div class="footer-content">
-                <div class="footer-left">
-                    <h3>Подлуцкий Никита</h3>
-                    <p>ML-инженер, специализирующийся на компьютерном зрении и обработке естественного языка</p>
-                </div>
+  </div>
+</section>
 
-                <div class="footer-right">
-                    <div class="social-links">
-                        <a href="https://github.com/Nikita-Podlutsky"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        <a href="https://t.me/Nikita_allscript"><i class="fa fa-telegram"></i></a>
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="exp-layout">
+    <div class="exp-aside rev">
+      <p class="stag">Опыт</p>
+      <div class="exp-big">EX<br>PE<br>RI<br>EN<br>CE</div>
+    </div>
+    <div class="exp-main">
+      <div class="exp-card rev d1">
+        <div class="exp-date">Декабрь 2024 — настоящее время</div>
+        <div class="exp-role">ML Research Engineer</div>
+        <div class="exp-org">MTUCI Lab260 — Лаборатория МТУСИ</div>
+        <ul class="exp-list">
+          <li>Эксперименты с новыми архитектурами: <strong>MoE, 3D-сети</strong> для медицинской диагностики</li>
+          <li>Разработка <strong>3D-MoE-Seg</strong> — сегментация структур мозга на КТ/МРТ</li>
+          <li>Настройка воспроизводимости экспериментов через <strong>Hydra</strong></li>
+          <li>Разработка прототипов ML-систем для научных задач</li>
+        </ul>
+      </div>
+      <div class="exp-card rev d2">
+        <div class="exp-date">2025 — личный проект</div>
+        <div class="exp-role">ML Engineer (Self-directed)</div>
+        <div class="exp-org">KOTODEX — Deep RAG System</div>
+        <ul class="exp-list">
+          <li>Спроектировал <strong>иерархический реранкер с query-aware attention</strong> — Hit@1 30% vs 17% pooling baseline на in-domain arXiv-бенчмарке</li>
+          <li>Написал асинхронный краулер <strong>100+ потоков</strong> с обходом блокировок и восстановлением битых PDF</li>
+          <li>Гибридное квантование <strong>QLoRA 4-bit + LoRA 16-bit</strong> — снизил VRAM в 4×</li>
+          <li>Прошёл путь от чтения Arxiv до работающего MVP за <strong>3 недели</strong></li>
+        </ul>
+      </div>
+      <div class="exp-card rev d3">
+        <div class="exp-date">2024 — настоящее время</div>
+        <div class="exp-role">Студент · Бакалавриат</div>
+        <div class="exp-org">МТУСИ — Вычислительная техника (2 курс, 2024–2028)</div>
+        <ul class="exp-list">
+          <li>Совмещение учёбы, работы в лаборатории и личных исследований</li>
+          <li>Специализация на архитектурном дизайне и теоретических основах DL</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-                    </div>
-                </div>
-            </div>
+<!-- STACK -->
+<section id="stack">
+  <p class="stag rev">Технологии</p>
+  <h2 class="sh rev">Технический <em>стек</em></h2>
+  <div class="stack-grid">
+    <div class="sblock rev d1">
+      <div class="sbhead">Deep Learning & Research</div>
+      <div class="sbitems">
+        <div class="sbitem">PyTorch — Expert</div>
+        <div class="sbitem">HuggingFace Transformers</div>
+        <div class="sbitem">Custom Layers & Architectures</div>
+        <div class="sbitem">Arxiv implementation</div>
+        <div class="sbitem">CUDA / GPU training</div>
+      </div>
+    </div>
+    <div class="sblock rev d2">
+      <div class="sbhead">NLP / LLM / RAG</div>
+      <div class="sbitems">
+        <div class="sbitem">Advanced RAG</div>
+        <div class="sbitem">PEFT — LoRA / QLoRA</div>
+        <div class="sbitem">Vector Databases</div>
+        <div class="sbitem">LangChain</div>
+        <div class="sbitem">Synthetic Data Generation</div>
+      </div>
+    </div>
+    <div class="sblock rev d3">
+      <div class="sbhead">CV / Audio / Med</div>
+      <div class="sbitems">
+        <div class="sbitem">3D Segmentation</div>
+        <div class="sbitem">Vision Transformers</div>
+        <div class="sbitem">Conformer / ASR</div>
+        <div class="sbitem">Medical Imaging (CT/MRI)</div>
+        <div class="sbitem">Mixture-of-Experts</div>
+      </div>
+    </div>
+    <div class="sblock rev d1">
+      <div class="sbhead">Engineering</div>
+      <div class="sbitems">
+        <div class="sbitem">Python — AsyncIO</div>
+        <div class="sbitem">Hydra (config management)</div>
+        <div class="sbitem">Linux / Git</div>
+        <div class="sbitem">Docker</div>
+        <div class="sbitem">FastAPI</div>
+      </div>
+    </div>
+    <div class="sblock sblock-wide rev d2">
+      <div class="sbhead">Подход к работе</div>
+      <div class="sbitems sbitems-2">
+        <div class="sbitem">Research → MVP за недели, не месяцы</div>
+        <div class="sbitem">Понимаю математику — не просто импортирую</div>
+        <div class="sbitem">Data Alchemy — синтетика там, где данных нет</div>
+        <div class="sbitem">Hardware-aware ML на потребительских GPU</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="footer-bottom">
-                <p>&copy; 2025 Подлуцкий Никита. Все права защищены.</p>
-            </div>
-        </footer>
-        <script src="script.js"></script>
+<!-- WHY -->
+<section id="why">
+  <p class="stag rev">Ценность</p>
+  <h2 class="sh rev">Почему стоит <em>работать вместе</em></h2>
+  <div class="why-grid">
+    <div class="wcard rev d1">
+      <div class="wnum">01</div>
+      <div class="wtitle">Скорость гипотез</div>
+      <div class="wtext">Arxiv → работающий MVP за 3 недели. В KOTODEX прошёл полный цикл: данные, обучение, деплой — самостоятельно и быстро.</div>
+    </div>
+    <div class="wcard rev d2">
+      <div class="wnum">02</div>
+      <div class="wtitle">Не API-потребитель</div>
+      <div class="wtext">Понимаю математику моделей. Адаптирую архитектуру под конкретную задачу и аргументирую выбор решения.</div>
+    </div>
+    <div class="wcard rev d3">
+      <div class="wnum">03</div>
+      <div class="wtitle">Data Alchemy</div>
+      <div class="wtext">Обучаю там, где данных нет. Генерирую качественную синтетику через LLM — не жду разметки от бизнеса месяцами.</div>
+    </div>
+    <div class="wcard rev d1">
+      <div class="wnum">04</div>
+      <div class="wtitle">Hardware-aware</div>
+      <div class="wtext">Работаю на потребительских GPU. QLoRA + LoRA, квантование, sliding window — всё чтобы работало на реальном железе.</div>
+    </div>
+    <div class="wcard rev d2">
+      <div class="wnum">05</div>
+      <div class="wtitle">Инженерная культура</div>
+      <div class="wtext">Оптимизированный код, готовый к интеграции. Учитываю память, скорость инференса, воспроизводимость.</div>
+    </div>
+    <div class="wcard rev d3">
+      <div class="wnum">06</div>
+      <div class="wtitle">Самостоятельность</div>
+      <div class="wtext">Удалённо 20–25 ч/нед. Веду задачу от постановки до результата. Эффективность подтверждена лабораторией и KOTODEX.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="stag rev" style="justify-content:center;">Контакт</p>
+  <h2 class="sh rev" style="text-align:center;">Есть задача?<br><em>Напишите.</em></h2>
+  <p class="contact-sub rev">ML Engineer / Research Engineer · удалённо · 20–25 ч/нед</p>
+  <div class="contact-row rev">
+    <a href="/cdn-cgi/l/email-protection#b5c5dbdcdedcc1d48484858cf5d2d8d4dcd99bd6dad8" class="btn btn-g"><span class="__cf_email__" data-cfemail="51213f383a3825306060616811363c30383d7f323e3c">[email&#160;protected]</span></a>
+    <a href="https://t.me/Nikita_allscript" target="_blank" class="btn btn-o">@Nikita_allscript</a>
+    <a href="https://github.com/Nikita-Podlutsky" target="_blank" class="btn btn-o">GitHub</a>
+  </div>
+</section>
+
+<footer>
+  <div class="fc">© 2025 Подлуцкий Никита — ML Research Engineer</div>
+  <div class="fr"><a href="https://github.com/Nikita-Podlutsky" target="_blank">github.com/Nikita-Podlutsky</a></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Cursor
+  const cur = document.getElementById('cur');
+  const curR = document.getElementById('curR');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  });
+  (function loop() {
+    rx += (mx - rx) * .1; ry += (my - ry) * .1;
+    curR.style.left = rx + 'px'; curR.style.top = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cur.style.transform = 'translate(-50%,-50%) scale(4)'; curR.style.opacity = '.7'; });
+    el.addEventListener('mouseleave', () => { cur.style.transform = 'translate(-50%,-50%) scale(1)'; curR.style.opacity = '.3'; });
+  });
+
+  // Scroll progress + nav
+  const prog = document.getElementById('prog');
+  const nav  = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY;
+    const m = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (s / m * 100) + '%';
+    nav.classList.toggle('scrolled', s > 40);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.rev').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
